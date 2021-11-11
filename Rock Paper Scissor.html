@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rocks Papers Scissors</title>
+</head>
+<body>
+  <script>
+
+    function computerPlay() {
+      let complay = Math.floor(Math.random() * 3) + 1;
+      if (complay === 1) {
+        return "Rock";
+      } else if (complay === 2) {
+        return "Paper" 
+      } else {
+        return "Scissor"
+      }
+    }
+    function playRound(playerSelection, computerSelection) {
+      playerSelection = playerSelection.toUpperCase();
+      computerSelection = computerSelection.toUpperCase();
+      if (playerSelection === computerSelection) {
+        return "Draw!";
+      } else if ((playerSelection === "ROCK" && computerSelection === "PAPER") ||
+                 (playerSelection === "PAPER" && computerSelection === "SCISSOR") ||
+                 (playerSelection === "SCISSOR" && computerSelection === "ROCK"))
+                {
+        return "You lose! " + computerSelection.charAt(0) + computerSelection.slice(1).toLowerCase() + " beats " + playerSelection.charAt(0) + playerSelection.slice(1).toLowerCase();
+      } else {
+        return "You win! " + playerSelection.charAt(0) + playerSelection.slice(1).toLowerCase() + " beats " + computerSelection.charAt(0) + computerSelection.slice(1).toLowerCase();
+      }
+    }
+    function game() {
+      const playerSelection = prompt("Your choice", "Rock");
+      const computerSelection = computerPlay();
+      alert(playRound(playerSelection, computerSelection));
+    }
+    game()
+    game()
+    game()
+    game()
+    game()
+  </script>
+</body>
+
+</html>
