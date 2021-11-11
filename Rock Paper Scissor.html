@@ -7,6 +7,10 @@
   <title>Rocks Papers Scissors</title>
 </head>
 <body>
+  <button class="rock">Rock</button>
+  <button class="paper">Paper</button>
+  <button class="scissor">Scissor</button>
+  <div class="container"></div>
   <script>
 
     function computerPlay() {
@@ -19,6 +23,8 @@
         return "Scissor"
       }
     }
+    let playerscore = 0;
+    let computerscore = 0;
     function playRound(playerSelection, computerSelection) {
       playerSelection = playerSelection.toUpperCase();
       computerSelection = computerSelection.toUpperCase();
@@ -28,21 +34,48 @@
                  (playerSelection === "PAPER" && computerSelection === "SCISSOR") ||
                  (playerSelection === "SCISSOR" && computerSelection === "ROCK"))
                 {
+        computerscore += 1;
         return "You lose! " + computerSelection.charAt(0) + computerSelection.slice(1).toLowerCase() + " beats " + playerSelection.charAt(0) + playerSelection.slice(1).toLowerCase();
+
       } else {
+        playerscore += 1;
         return "You win! " + playerSelection.charAt(0) + playerSelection.slice(1).toLowerCase() + " beats " + computerSelection.charAt(0) + computerSelection.slice(1).toLowerCase();
       }
+    
+    };
+
+    function winner() {
+      if (playerscore >= 5 && playerscore > computerscore) {
+        return "You won!";
+      } else if (computerscore >= 5 && computerscore > playerscore) {
+        return "Computer won!";
+      } else {
+        return '';
+      }
     }
-    function game() {
+
+    `function game() {
       const playerSelection = prompt("Your choice", "Rock");
       const computerSelection = computerPlay();
       alert(playRound(playerSelection, computerSelection));
-    }
-    game()
-    game()
-    game()
-    game()
-    game()
+    }` // Useless now
+
+    const container = document.querySelector(".container");
+    const div = document.createElement('div');
+    const score = document.createElement('div');
+    const btns = document.querySelectorAll("button");
+    btns.forEach((button) => {
+      button.addEventListener(`click`, () => {
+
+        div.textContent = playRound(button.className, computerPlay());
+        score.textContent = "You " + playerscore + " - " + computerscore + " Computer! " + winner()
+        container.appendChild(div);
+        container.appendChild(score);
+
+      });
+    });
+
+
   </script>
 </body>
 
